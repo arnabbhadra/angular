@@ -1,0 +1,78 @@
+<h2>Create Product</h2>
+<form #productForm="ngForm" (ngSubmit)="createNewProduct(productForm)">
+    <label for="name">Enter Product Name</label><br>
+    <input class="form-control" type="text" [(ngModel)]="name" name="name" #productName="ngModel" minlength="5" required >
+    <div *ngIf="productName.invalid && (productName.dirty || productName.touched)"
+    class="alert">
+
+        <div *ngIf="productName.errors?.required">
+            Name is required.
+        </div>
+        <div *ngIf="productName.errors?.minlength">
+            Name must be at least 4 characters long.
+        </div>
+
+    </div><br>
+
+    <label for="price">Enter Product Price</label><br>
+    <input type="number" name="price" id="price" [(ngModel)]="price" #Productprice="ngModel" min="1" required><br>
+
+    <div *ngIf="Productprice.invalid && (Productprice.dirty || Productprice.touched)"
+    class="alert">
+
+        <div *ngIf="Productprice.errors?.required">
+            Product price is required.
+        </div>
+        <div *ngIf="Productprice.errors?.min">
+            Price must be more than or equal to 1.
+        </div>
+
+    </div><br>
+
+    <label for="quantity">Enter Product Quantity</label><br>
+    <input type="number" name="quantity" id="quantity" [(ngModel)]="quantity" #productQuantity="ngModel" min="1" max="100" required><br>
+    <div *ngIf="productQuantity.invalid && (productQuantity.dirty || productQuantity.touched)"
+    class="alert">
+
+        <div *ngIf="productQuantity.errors?.required">
+            Product price is required.
+        </div>
+        <div *ngIf="productQuantity.errors?.min || productQuantity.errors?.max">
+            Price must be more than or equal to 1 and less than or equal to 100.
+        </div>
+
+    </div><br>
+    
+    
+    <label for="productPic">Enter Product Picture Link</label><br>
+    <input type="text" name="productPic" id="productPic" [(ngModel)]="productPic" #productPicLink="ngModel" pattern="https?://.+" required><br><br>
+
+    <div *ngIf="productPicLink.invalid && (productPicLink.dirty || productPicLink.touched)"
+    class="alert">
+
+        <div *ngIf="productPicLink.errors?.pattern">
+            Product Picture link is invalid is required.
+        </div>
+        <div *ngIf="productPicLink.errors?.required">
+            Product Picture link is required.
+        </div>
+
+    </div><br>
+
+
+
+    <label for="limitedProduct"> Is it a limited Product?</label> <br>
+    <select id="limitedProduct" name=limitedProduct [(ngModel)]="limitedProduct" #productavailability="ngModel" required>
+        <option value="true" selected>True</option>
+        <option value="false">False</option>
+    </select> <br><br>
+    <div *ngIf="productavailability.invalid && (productavailability.dirty || productavailability.touched)"
+    class="alert">
+
+        <div *ngIf="productPicLink.errors?.required">
+            Product Availability status is required.
+        </div>
+
+    </div><br>
+    <button type="submit"> Create new Product</button>
+</form>

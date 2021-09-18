@@ -1,0 +1,29 @@
+<p>Search by Product name
+    <input type="text" [(ngModel)]="searchkey">
+    <button (click)="searchBasedOnKey()">Submit</button><br>
+    <i>Search key: {{ searchkey }}</i>
+</p>
+<p>Product List </p>
+
+<ol *ngFor = "let product of productList">
+        <div *ngIf= "product.limitedProduct; then thenblock else elseblock">
+            
+        </div>
+        <ng-template #thenblock>
+            <b>Product Name :</b> 
+            <a [routerLink]="['/product']"  [queryParams]="{ name:  product.name }" >
+                {{product.name }}
+                
+            </a>
+        </ng-template>
+        <ng-template #elseblock>
+            <b>Product Name :</b> 
+            <a [routerLink]="['/product']"  [queryParams]="{ name:  product.name }" appLimitedProduct>
+                {{product.name }}    
+            </a>
+
+        </ng-template>
+
+</ol>
+
+<button (click)="buttonClick();">Create a Product</button>
